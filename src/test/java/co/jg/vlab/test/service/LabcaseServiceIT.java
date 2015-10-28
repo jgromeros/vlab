@@ -32,22 +32,22 @@ public class LabcaseServiceIT {
         JavaArchive jar = ShrinkWrap.create(ZipImporter.class, "vlab-0.0.1-SNAPSHOT.jar")
                 .importFrom(new File("target/vlab-0.0.1-SNAPSHOT.jar")).as(JavaArchive.class);
         war.addAsLibrary(jar);
-        File log4j = new File("C:/EntornoSimon/repository/log4j/log4j/1.2.16/log4j-1.2.16.jar");
+        File log4j = new File("/home/jgromero/.m2/repository/log4j/log4j/1.2.16/log4j-1.2.16.jar");
         JavaArchive log4jjar = ShrinkWrap.create(ZipImporter.class, "log4j.jar").importFrom(log4j)
                 .as(JavaArchive.class);
         war.addAsLibrary(log4jjar);
         File hibcore = new File(
-                "C:/EntornoSimon/repository/org/hibernate/hibernate-core/4.3.7.Final/hibernate-core-4.3.7.Final.jar");
+                "/home/jgromero/.m2/repository/org/hibernate/hibernate-core/4.3.7.Final/hibernate-core-4.3.7.Final.jar");
         JavaArchive hibcorejar = ShrinkWrap.create(ZipImporter.class, "hibernate-core-4.3.7.Final.jar")
                 .importFrom(hibcore).as(JavaArchive.class);
         war.addAsLibrary(hibcorejar);
         File hibem = new File(
-                "C:/EntornoSimon/repository/org/hibernate/hibernate-entitymanager/4.3.7.Final/hibernate-entitymanager-4.3.7.Final.jar");
+                "/home/jgromero/.m2/repository/org/hibernate/hibernate-entitymanager/4.3.7.Final/hibernate-entitymanager-4.3.7.Final.jar");
         JavaArchive hibemjar = ShrinkWrap.create(ZipImporter.class, "hibernate-entitymanager-4.3.7.Final.jar")
                 .importFrom(hibem).as(JavaArchive.class);
         war.addAsLibrary(hibemjar);
         File postgresql = new File(
-                "C:/EntornoSimon/repository/org/postgresql/postgresql/9.3-1100-jdbc41/postgresql-9.3-1100-jdbc41.jar");
+                "/home/jgromero/.m2/repository/org/postgresql/postgresql/9.3-1100-jdbc41/postgresql-9.3-1100-jdbc41.jar");
         JavaArchive postgresqljar = ShrinkWrap.create(ZipImporter.class, "postgresql.jar")
                 .importFrom(postgresql).as(JavaArchive.class);
         war.addAsLibrary(postgresqljar);
