@@ -1,11 +1,25 @@
 package co.jg.vlab.model.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import org.postgresql.util.PGInterval;
 
-import java.util.Set;
+import co.jg.vlab.model.IntervalConverter;
 
 
 /**
@@ -23,7 +37,8 @@ public class TestDescription implements Serializable {
 	private Integer id;
 
 	@Column(name="avg_result_time")
-	private PGInterval avgResultTime;
+	@Convert(converter = IntervalConverter.class)
+	private String avgResultTime;
 
 	private String description;
 
@@ -97,11 +112,11 @@ public class TestDescription implements Serializable {
 		this.id = id;
 	}
 
-	public PGInterval getAvgResultTime() {
+	public String getAvgResultTime() {
 		return this.avgResultTime;
 	}
 
-	public void setAvgResultTime(PGInterval avgResultTime) {
+	public void setAvgResultTime(String avgResultTime) {
 		this.avgResultTime = avgResultTime;
 	}
 

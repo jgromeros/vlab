@@ -1,16 +1,28 @@
 package co.jg.vlab.model.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the labcase database table.
  * 
  */
 @Entity
+@NamedQuery(name = "Labcase.findByCode", query = "select l from Labcase l where l.code = :code")
 public class Labcase implements Serializable {
 	private static final long serialVersionUID = 1L;
 

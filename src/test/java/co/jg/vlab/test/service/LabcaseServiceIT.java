@@ -1,11 +1,13 @@
 package co.jg.vlab.test.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
-import java.util.List;
+import java.util.Date;
 
 import javax.inject.Inject;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -14,17 +16,24 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.importer.ZipImporter;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import co.jg.vlab.model.entity.Labcase;
-import co.jg.vlab.service.LabcaseService;
+import co.jg.vlab.model.entity.Place;
+import co.jg.vlab.service.PlaceService;
+import co.jg.vlab.service.rest.LabcaseServiceREST;
 
 @RunWith(Arquillian.class)
 public class LabcaseServiceIT {
 
+    private static final String CODE_FOR_TEST = "99999";
     @Inject
-    private LabcaseService labcaseService;
+    private LabcaseServiceREST labcaseService;
+
+    @Inject
+    private PlaceService placeService;
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -69,6 +78,33 @@ public class LabcaseServiceIT {
         assertEquals(200, response.getStatus());
         Labcase labcase = (Labcase) response.getEntity();
         assertEquals(new Integer(1932), labcase.getId());
+    }
+
+    @Test
+    public void testPersistLabcase() {
+        Labcase labcase = new Labcase();
+        labcase.setReceptionDate(new Date());
+        labcase.setCode(CODE_FOR_TEST);
+        Response resp = placeService.getPlace(202);
+        labcase.setPlace((Place) resp.getEntity());
+        labcase.setState("R");
+        Response response = labcaseService.persistLabcase(labcase);
+        assertNotNull(response.getEntity());
+    }
+
+    public void testRemoveLabcase(@PathParam("id") Long id) {
+    }
+
+    public void testUpdateLabcase(Labcase labcase) {
+    }
+
+    @After
+    public void afterTest() {
+        Response response = labcaseService.getLabcaseByCode(CODE_FOR_TEST);
+        if (response != null) {
+            Labcase labcase = (Labcase) response.getEntity();
+            labcaseService.removeLabcase(labcase.getId());
+        }
     }
 
 }

@@ -20,6 +20,8 @@ public class Profile implements Serializable {
 
 	private String description;
 
+	private Boolean enabled;
+
 	//bi-directional many-to-one association to PricesByTestDesc
 	@OneToMany(mappedBy="profileBean")
 	private Set<PricesByTestDesc> pricesByTestDescs;
@@ -51,6 +53,14 @@ public class Profile implements Serializable {
 		this.description = description;
 	}
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+    
 	public Set<PricesByTestDesc> getPricesByTestDescs() {
 		return this.pricesByTestDescs;
 	}
@@ -74,5 +84,5 @@ public class Profile implements Serializable {
 	public void setTestProfiles(Set<TestProfile> testProfiles) {
 		this.testProfiles = testProfiles;
 	}
-	
+
 }
