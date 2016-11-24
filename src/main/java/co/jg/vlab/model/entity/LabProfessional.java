@@ -2,6 +2,11 @@ package co.jg.vlab.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import co.jg.vlab.model.views.EntityView;
+
 import java.util.Set;
 
 
@@ -38,10 +43,12 @@ public class LabProfessional implements Serializable {
 	private ApplicationOwner applicationOwner;
 
 	//bi-directional many-to-one association to Labcase
+    @JsonView(EntityView.Extended.class)
 	@OneToMany(mappedBy="labProfessional")
 	private Set<Labcase> labcases;
 
 	//bi-directional many-to-one association to Result
+    @JsonView(EntityView.Extended.class)
 	@OneToMany(mappedBy="labProfessionalBean")
 	private Set<Result> results;
 

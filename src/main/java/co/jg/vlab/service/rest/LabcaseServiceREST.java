@@ -14,7 +14,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import co.jg.vlab.model.entity.Labcase;
+import co.jg.vlab.model.views.EntityView;
 import co.jg.vlab.service.LabcaseService;
 
 @Path("labcases")
@@ -23,6 +26,7 @@ public class LabcaseServiceREST {
     @Inject
     private LabcaseService labcaseService;
 
+    @JsonView(EntityView.Regular.class)
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)

@@ -2,6 +2,11 @@ package co.jg.vlab.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import co.jg.vlab.model.views.EntityView;
+
 import java.util.Set;
 
 
@@ -24,6 +29,7 @@ public class Place implements Serializable {
 	private String nationalCode;
 
 	//bi-directional many-to-one association to Labcase
+    @JsonView(EntityView.Extended.class)
 	@OneToMany(mappedBy="place")
 	private Set<Labcase> labcases;
 
@@ -33,6 +39,7 @@ public class Place implements Serializable {
 	private Place place;
 
 	//bi-directional many-to-one association to Place
+    @JsonView(EntityView.Extended.class)
 	@OneToMany(mappedBy="place")
 	private Set<Place> places;
 

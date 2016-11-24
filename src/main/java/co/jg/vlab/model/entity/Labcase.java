@@ -17,6 +17,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import co.jg.vlab.model.views.EntityView;
+
 /**
  * The persistent class for the labcase database table.
  * 
@@ -59,6 +63,7 @@ public class Labcase implements Serializable {
 	private String zone;
 
 	//bi-directional many-to-one association to Animal
+	@JsonView(EntityView.Extended.class)
 	@OneToMany(mappedBy="labcaseBean")
 	private Set<Animal> animals;
 

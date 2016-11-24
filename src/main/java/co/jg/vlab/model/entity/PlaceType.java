@@ -2,6 +2,11 @@ package co.jg.vlab.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import co.jg.vlab.model.views.EntityView;
+
 import java.util.Set;
 
 
@@ -22,6 +27,7 @@ public class PlaceType implements Serializable {
 	private String description;
 
 	//bi-directional many-to-one association to Place
+    @JsonView(EntityView.Extended.class)
 	@OneToMany(mappedBy="placeTypeBean")
 	private Set<Place> places;
 

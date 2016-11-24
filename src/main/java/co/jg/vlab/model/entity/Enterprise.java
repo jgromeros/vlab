@@ -2,6 +2,11 @@ package co.jg.vlab.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import co.jg.vlab.model.views.EntityView;
+
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -37,10 +42,12 @@ public class Enterprise implements Serializable {
 	private String phone;
 
 	//bi-directional many-to-one association to Bill
+    @JsonView(EntityView.Extended.class)
 	@OneToMany(mappedBy="enterprise")
 	private Set<Bill> bills;
 
 	//bi-directional many-to-one association to Labcase
+    @JsonView(EntityView.Extended.class)
 	@OneToMany(mappedBy="enterpriseBean")
 	private Set<Labcase> labcases;
 
